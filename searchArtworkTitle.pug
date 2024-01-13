@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Search Artwork by Title
+  form(method="GET" action="/perform-title-search")
+    input(type="text" name="title" placeholder="Enter Artwork Title" required)
+    button(type="submit") Search
+
+

@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  h1 Artworks by #{artistName}
+
+  if user.followedArtists.includes(artistName)
+    form(method="POST" action="/unfollow-artist")
+      input(type="hidden" name="artistName" value=artistName)
+      button(type="submit") Unfollow Artist
+  else
+    form(method="POST" action="/follow-artist")
+      input(type="hidden" name="artistName" value=artistName)
+      button(type="submit") Follow Artist
+
+  if artworks.length > 0
+    each artwork in artworks
+      div
+        h2= artwork.Title
+        p Artist: #{artwork.Artist}
+        p Year: #{artwork.Year}
+        p Category: #{artwork.Category}
+        p Medium: #{artwork.Medium}
+        p Description: #{artwork.Description}
+        if artwork.Poster
+          img(src=artwork.Poster, alt=`Poster of ${artwork.Title}`)
+        
+        // Like/Unlike button
+        if artwork.likes.includes(user._id)
+          form(method="POST" action="/unlike-artwork")
+            input(type="hidden" name="artworkId" value=artwork._id.toString())
+            button(type="submit") Unlike
+        else
+          form(method="POST" action="/like-artwork")
+            input(type="hidden" name="artworkId" value=artwork._id.toString())
+            button(type="submit") Like
+        
+        // Review form
+        - let userReview = artwork.reviews.find(review => review.reviewer.toString() === user._id.toString());
+        - let reviewText = userReview ? userReview.text : '';
+        form(method="POST" action="/submit-review")
+          input(type="hidden" name="artworkId" value=artwork._id.toString())
+          textarea(name="reviewText" required placeholder="Write your review here")= reviewText
+          button(type="submit") Submit Review
+  else
+    p No artworks found for this artist.
+
+
+

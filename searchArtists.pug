@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Search for an Artist
+
+  form(method="POST" action="/search-artists")
+    input(type="text" name="artistName" required placeholder="Enter Artist Name")
+    button(type="submit") Search
+
+  if noResults
+    p No results found.
+

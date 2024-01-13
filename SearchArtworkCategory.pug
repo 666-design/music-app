@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Search Artwork by Category
+  form(method="GET" action="/perform-category-search")
+    input(type="text" name="category" placeholder="Enter Artwork Category" required)
+    button(type="submit") Search
+
+
+

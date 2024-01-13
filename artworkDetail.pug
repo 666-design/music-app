@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 #{artwork.Title}
+  p Artist: #{artwork.Artist}
+  p Year: #{artwork.Year}
+  p Category: #{artwork.Category}
+  p Medium: #{artwork.Medium}
+  p Description: #{artwork.Description}
+  if artwork.Poster
+    img(src=artwork.Poster, alt=`Poster of ${artwork.Title}`)

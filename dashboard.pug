@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1(style='margin-bottom: 20px;') Welcome to the Dashboard
+  p(style='margin-bottom: 10px;') Welcome, #{user.username}! Explore the world of art.
+
+  if messages
+    .notifications(style='margin-bottom: 20px;')
+      each msg in messages
+        .notification= msg
+
+  if !user.isArtist
+    a(href='/upgrade-account' style='display: block; margin-bottom: 20px;') Upgrade to Artist Account
+
+  ul(style='margin-bottom: 20px;')
+    li: a(href='/browse-artworks') Browse Artworks
+    li: a(href='/search-artists') Search for Artists
+    li: a(href='/search-artwork-title') Search by Artwork Title
+    li: a(href='/search-artwork-category') Search by Artwork Category
+    li: a(href='/my-profile') My Profile
+
+  if followedArtists.length > 0
+    h2(style='margin-bottom: 10px;') Followed Artists
+    ul
+      each artist in followedArtists
+        li: a(href=`/artist/${artist.replace(' ', '-')}` style='margin-bottom: 5px;') #{artist}
+
+  if likedArtworks.length > 0
+    h2(style='margin-bottom: 10px;') Liked Artworks
+    ul
+      each artwork in likedArtworks
+        li: a(href=`/artwork/${artwork._id}` style='margin-bottom: 5px;') #{artwork.Title}
+
+  p(style='margin-bottom: 10px;'): a(href='/logout') To log out, click here
+  p: a(href='/update-account-information') Update Your Account Information
+
+
+
+

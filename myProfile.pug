@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 My Profile
+  p Username: #{user.username}
+  // Display whether the user is an artist
+  p Account Type: #{user.isArtist ? 'Artist' : 'Patron'}
+  
+  p
+    | To return to the dashboard, click
+    a(href='/dashboard') here
+

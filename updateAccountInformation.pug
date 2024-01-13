@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Update Your Account Information
+
+  form(method="POST" action="/update-account-information")
+    // Option to downgrade account
+    if user.isArtist
+      .form-group
+        label(for="downgradeAccount") Downgrade to Patron Account
+        input(type="checkbox" name="downgradeAccount" id="downgradeAccount" value="true")
+
+    // Submit button
+    button(type="submit") Update Information
